@@ -8,7 +8,7 @@ def generate_random():
     characters = lowerCaseLetters + lowerCaseLetters.upper() + digits + specialCharacters
 
     # length = input("Length: ")
-    length = randint(1,2137)
+    length = randint(3000,2**13)
     text = ""
 
     print("Generating data...")
