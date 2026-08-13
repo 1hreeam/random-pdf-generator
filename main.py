@@ -1,4 +1,24 @@
-from generate_text import generate_random
-from generate_pdf import generate_pdf
+from markdown_pdf import MarkdownPdf, Section
+from faker import Faker
+from random import randint
 
-generate_pdf(generate_random())
+def generate_pdf(length: int, sections=1, locale="en_US"):
+    f = Faker(locale)
+    pdf = MarkdownPdf(optimize=True, toc_level=0)
+
+    author = f.name()
+    title = f.sentence(2, True)
+    
+    pdf.add_section(Section(f"# {title}\n {author}", toc=False))
+    for i in range(sections):
+        s_length = randint(1,length)
+        pdf.add_section(Section(f"## {f.sentence(3, True)}\n {f.text(s_length)}"))
+        length = length - s_length
+        if length <= 0:
+            break
+
+    pdf.save(f"./output/{title}.pdf")
+    print("Document saved ✅")
+
+
+generate_pdf(randint(3000,2**15), 3)

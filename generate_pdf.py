@@ -14,6 +14,3 @@ def generate_pdf(markdown_text):
         print("Document saved ✅")
     except:
         print("Task Failed")
-
-
-
