@@ -12,7 +12,7 @@ def generate_pdf(length: int, sections=1, locale="en_US"):
     pdf.add_section(Section(f"# {title}\n {author}", toc=False))
     for i in range(sections):
         s_length = randint(5,length)
-        pdf.add_section(Section(f"## {f.sentence(3, True)}\n {f.text(s_length)}"))
+        pdf.add_section(Section(f"## {f.sentence(3, True)[:-1]}\n {f.text(s_length)}"))
         length = length - s_length
         if length <= 0:
             break
