@@ -7,11 +7,11 @@ def generate_pdf(length: int, sections=1, locale="en_US"):
     pdf = MarkdownPdf(optimize=True, toc_level=0)
 
     author = f.name()
-    title = f.sentence(2, True)
+    title = f.sentence(2, True)[:-1]
     
     pdf.add_section(Section(f"# {title}\n {author}", toc=False))
     for i in range(sections):
-        s_length = randint(1,length)
+        s_length = randint(5,length)
         pdf.add_section(Section(f"## {f.sentence(3, True)}\n {f.text(s_length)}"))
         length = length - s_length
         if length <= 0:
@@ -21,4 +21,4 @@ def generate_pdf(length: int, sections=1, locale="en_US"):
     print("Document saved ✅")
 
 
-generate_pdf(randint(3000,2**15), 3)
+generate_pdf(randint(3000,2**15), randint(1,7))
