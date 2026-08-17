@@ -9,3 +9,4 @@ Install dependencies:
 
 - CLI version
 - absolute paths
+- AI real pdfs generator
