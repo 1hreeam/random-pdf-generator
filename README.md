@@ -3,3 +3,4 @@
 ## TODO
 
 - CLI version
+- absolute paths
