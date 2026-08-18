@@ -39,5 +39,4 @@ Files are saved in the `output` directory.
 
 ## Development
 
-- absolute paths
 - AI real pdfs generator

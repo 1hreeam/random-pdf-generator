@@ -1,6 +1,7 @@
 from markdown_pdf import MarkdownPdf, Section
 from faker import Faker
 from random import randint
+from pathlib import Path
 
 def generate_pdf(length: int, sections=1, locale="en_US"):
     f = Faker(locale)
@@ -17,5 +18,7 @@ def generate_pdf(length: int, sections=1, locale="en_US"):
         if length <= 0:
             break
 
-    pdf.save(f"./output/{title}.pdf")
+    output_path = Path(__file__).resolve().parent / "output" / f"{title}.pdf"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    pdf.save(str(output_path))
     print("Document saved ✅")
