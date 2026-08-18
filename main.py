@@ -1,24 +1,25 @@
-from markdown_pdf import MarkdownPdf, Section
-from faker import Faker
-from random import randint
+from generate import generate_pdf
+import click
 
-def generate_pdf(length: int, sections=1, locale="en_US"):
-    f = Faker(locale)
-    pdf = MarkdownPdf(optimize=True, toc_level=0)
+@click.command()
+@click.argument('length', type=click.IntRange(5))
 
-    author = f.name()
-    title = f.sentence(2, True)[:-1]
-    
-    pdf.add_section(Section(f"# {title}\n {author}", toc=False))
-    for i in range(sections):
-        s_length = randint(5,length)
-        pdf.add_section(Section(f"## {f.sentence(3, True)[:-1]}\n {f.text(s_length)}"))
-        length = length - s_length
-        if length <= 0:
-            break
+@click.option('--count', default=1, type=click.IntRange(1), show_default=True,
+              help='Number of PDF files to create.')
 
-    pdf.save(f"./output/{title}.pdf")
-    print("Document saved ✅")
+@click.option('--sections', default=1, type=click.IntRange(1), show_default=True,
+              help='Number of sections in each PDF.')
 
+@click.option('--locale', type=str, 
+              help='Locale used for generated names and text.')
 
-generate_pdf(randint(3000,2**15), randint(1,7))
+def gen(length, count, sections, locale):
+    """Generate random PDF files.
+
+    LENGTH is the approximate amount of text in each file.
+    """
+    for i in range(0, count):
+        generate_pdf(length, sections, locale)
+
+if (__name__ == "__main__"):
+    gen()
