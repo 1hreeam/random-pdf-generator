@@ -24,6 +24,12 @@ Run the script with a required text length:
 python main.py LENGTH [OPTIONS]
 ```
 
+After installing the package, the same command is available as:
+
+```bash
+random-pdf-generator LENGTH [OPTIONS]
+```
+
 `LENGTH` must be at least 5. It controls the approximate amount of text in each PDF.
 
 ### Options
@@ -44,7 +50,8 @@ python main.py 3000 --locale en_US
 python main.py 3000 --output-dir ./pdfs --seed 7
 ```
 
-Files are saved in the `output` directory by default.
+Files are saved in the `output` directory by default. The default directory is
+resolved from the script location, so the command can be run from another directory.
 
 To run the tests:
 
