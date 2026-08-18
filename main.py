@@ -1,5 +1,6 @@
 from generate import generate_pdf
 import click
+from pathlib import Path
 
 @click.command()
 @click.argument('length', type=click.IntRange(5))
@@ -13,13 +14,26 @@ import click
 @click.option('--locale', type=str, 
               help='Locale used for generated names and text.')
 
-def gen(length, count, sections, locale):
+@click.option('--output-dir', type=click.Path(file_okay=False, path_type=Path),
+              help='Directory where PDF files are saved.')
+
+@click.option('--seed', type=int,
+              help='Seed for reproducible generated content.')
+
+def gen(length, count, sections, locale, output_dir, seed):
     """Generate random PDF files.
 
     LENGTH is the approximate amount of text in each file.
     """
-    for i in range(0, count):
-        generate_pdf(length, sections, locale)
+    if sections > length // 5:
+        raise click.BadParameter(
+            'length must allow at least 5 characters per section',
+            param_hint='--sections',
+        )
+
+    for index in range(count):
+        document_seed = seed + index if seed is not None else None
+        generate_pdf(length, sections, locale, output_dir, document_seed)
 
 if (__name__ == "__main__"):
     gen()
