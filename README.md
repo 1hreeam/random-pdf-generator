@@ -59,19 +59,7 @@ To run the tests:
 python -m pytest -q
 ```
 
-## Development
-
-The following improvements are implemented:
-
-- Input validation for length and sections.
-- Safe and unique generated filenames.
-- Custom output directory with `--output-dir`.
-- Reproducible output with `--seed`.
-- Pinned dependencies.
-- Tests and continuous integration.
-- Installation as a command.
-
-### Future Ideas
+## Future Ideas
 
 - Add more PDF templates and content styles.
 - Add support for custom fonts and themes.
