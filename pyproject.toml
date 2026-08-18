@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "random-pdf-generator"
+version = "0.1.0"
+description = "Generate PDF files with random names and text."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "Faker==40.36.0",
+    "markdown-pdf==1.13.2",
+    "click==8.4.2",
+]
+
+[project.scripts]
+random-pdf-generator = "main:gen"
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1"]
+
+[tool.setuptools]
+py-modules = ["main", "generate"]
